@@ -35,7 +35,9 @@ addOne(-5) //=> -4
 // Your solution for 01-addOne here:
 
 
-
+function addOne(num) {
+  return num + 1;
+}
 
 
 /*-----------------------------------------------------------------
@@ -58,7 +60,13 @@ addTwoNumbers('Hello', 5) //=> NaN
 // Your solution for 02-addTwoNumbers here:
 
 
-
+function addTwoNumbers(num1, num2) {
+  if (typeof num1 === 'number' && typeof num2 === 'number') {
+    return num1 + num2;
+  } else {
+    return NaN;
+  }
+}
 
 
 /*-----------------------------------------------------------------
@@ -81,7 +89,13 @@ sumNumbers([]) //=> 0
 // Your solution for 03-sumNumbers here:
 
 
-
+function sumNumbers(nums) {
+  let sum = 0;
+  for (var i = 0; i < nums.length; i++) {
+    sum += nums[i];
+  }
+  return sum;
+}
 
 
 /*-----------------------------------------------------------------
@@ -104,7 +118,13 @@ add(7,-12) //=> -5
 // Your solution for 04-addList here:
 
 
-
+function addList() {
+  sum = 0; 
+  for (var i = 0; i < arguments.length; i++) {
+    sum += arguments[i];
+  }
+  return sum;
+}
 
 
 /*-----------------------------------------------------------------
@@ -128,7 +148,13 @@ computeRemainder(10.5, 3) //=> 1.5
 // Your solution for 05-computeRemainder:
 
 
+function computeRemainder(num1, num2) {
+  if (num2 === 0) return Infinity;
+  let division = Math.abs(num1/num2);
+  let decimal = division - Math.floor(division);
+  return decimal
 
+}
 
 
 /*-----------------------------------------------------------------
@@ -151,7 +177,9 @@ range(5,2) //=> "First argument must be less than second"
 // Your solution for 06-range here:
 
 
-
+function range(num1, num2) {
+  
+}
 
 
 /*-----------------------------------------------------------------
