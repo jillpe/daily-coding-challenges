@@ -15,7 +15,7 @@ sayHello() //=> Hello!
 
 function sayHello() {
   return 'Hello!'
-}
+};
 
 
 /*-----------------------------------------------------------------
@@ -37,7 +37,7 @@ addOne(-5) //=> -4
 
 function addOne(num) {
   return num + 1;
-}
+};
 
 
 /*-----------------------------------------------------------------
@@ -66,7 +66,7 @@ function addTwoNumbers(num1, num2) {
   } else {
     return NaN;
   }
-}
+};
 
 
 /*-----------------------------------------------------------------
@@ -95,7 +95,7 @@ function sumNumbers(nums) {
     sum += nums[i];
   }
   return sum;
-}
+};
 
 
 /*-----------------------------------------------------------------
@@ -124,7 +124,7 @@ function addList() {
     sum += arguments[i];
   }
   return sum;
-}
+};
 
 
 /*-----------------------------------------------------------------
@@ -150,10 +150,7 @@ computeRemainder(10.5, 3) //=> 1.5
 
 function computeRemainder(num1, num2) {
   if (num2 === 0) return Infinity;
-  let division = Math.abs(num1/num2);
-  let decimal = division - Math.floor(division);
-  return decimal
-
+  return num1 - (Math.floor(num1 / num2) * num2);
 }
 
 
@@ -178,7 +175,13 @@ range(5,2) //=> "First argument must be less than second"
 
 
 function range(num1, num2) {
+  if (num1 > num2) return 'First argument must be less than second';
+  let range = [];
+  for (let n = num1; n < num2; n++) {
+    range.push(n);
+  }
   
+  return range;
 }
 
 
@@ -198,7 +201,13 @@ reverseUpcaseString("SEI Rocks!"); //=> "!SKCOR IES"
 // Your solution for 07-reverseUpcaseString here:
 
 
-
+function reverseUpcaseString(string) {
+  let finalString = '';
+  for (var i = 0; i < string.length; i++) {
+    finalString = string.charAt(i).toUpperCase() + finalString;
+  }
+  return finalString;
+};
 
 
 /*-----------------------------------------------------------------
@@ -219,7 +228,14 @@ removeEnds('a'); //=> "" (empty string)
 // Your solution for 08-removeEnds here:
 
 
-
+function removeEnds(str) {
+  if (str.length < 3) return '';
+  let result= '';
+  for (let i = 1; i < str.length - 1; i++) {
+    result += str.charAt(i);
+  }
+  return result;
+}
 
 
 /*-----------------------------------------------------------------
@@ -241,7 +257,18 @@ charCount('Today is fantastic!') //=> { T: 1, o: 1, d: 1, a: 3, y: 1, ' ': 2, i:
 -----------------------------------------------------------------*/
 // Your solution for 09-charCount here:
 
-
+function charCount(str) {
+  let object = {}
+  for (let i = 0; i< str.length; i++) {
+    let character = str.charAt(i);
+    if (object[character]) {
+      object[character]++;
+    } else {
+      object[character] = 1;
+    }
+  }
+  return object;
+};
 
 
 
@@ -267,7 +294,13 @@ formatWithPadding(1234, '*', 3); //=> "1234"
 -----------------------------------------------------------------*/
 // Your solution for 10-formatWithPadding here:
 
-
+function formatWithPadding(number, string, length) {
+  let result = number.toFixed(0);
+  while (result.length < length) {
+    result = string + result;
+  }
+  return result;
+}
 
 
 
@@ -292,7 +325,14 @@ isPalindrome(''); //=> true
 -----------------------------------------------------------------*/
 // Your solution for 11-isPalindrome here:
 
-
+function isPalindrome(str) {
+  str = str.toLowerCase();
+  while (str.includes(' ')) str = str.replace(' ', '');
+  for (let i = 0; i < Math.floor(str.length / 2); i++) {
+    if (str.charAt(i) !== str.charAt(str.length - i - 1)) return false;
+  }
+  return true;
+}
 
 
 
@@ -318,7 +358,14 @@ hammingDistance('abc', 'ab'); //=> NaN
 -----------------------------------------------------------------*/
 // Your solution for 12-hammingDistance here:
 
-
+function hammingDistance(str1, str2) {
+  if (str1.length !== str2.length) return NaN;
+  let count = 0;
+  for (let i = 0; i < str1.length; i++) {
+    if (str1.charAt(i) !== str2.charAt(i)) count++;
+  }
+  return count;
+};
 
 
 
@@ -343,7 +390,14 @@ mumble('!A 2'); //=> '!-AA-   -2222'
 // Your solution for 13-mumble here:
 
 
-
+function mumble(str) {
+  let result = '';
+  for (let i = 0; i < str.length; i++) {
+    result += str.charAt(i).repeat(i + 1);
+    if (i !== (str.length - 1)) result += '-';
+  }
+  return result;
+};
 
 
 /*-----------------------------------------------------------------
@@ -364,7 +418,13 @@ fromPairs([ ['name', 'Sam"], ['age', 24], ['name', 'Sally'] ]) //=> { name: "Sal
 -----------------------------------------------------------------*/
 // Your solution for 14-fromPairs here:
 
-
+function fromPairs(arr) {
+  let obj = {};
+  arr.forEach(function(key) {
+    obj[key[0]] = key[1];
+  });
+  return obj;
+};
 
 
 
@@ -386,7 +446,15 @@ mergeObjects({a: 1, b: 2, c: 3}, {d: 4}, {b: 22, d: 44});  //=> {a: 1, b: 22, c:
 -----------------------------------------------------------------*/
 // Your solution for 15-mergeObjects here:
 
-
+function mergeObjects(...objects) {
+  let result = objects[0];
+  for (o of objects) {
+    for (const [key, value] of Object.entries(o)) {
+    result[key] = value;
+  }
+  }
+  return result;
+}
 
 
 
@@ -424,7 +492,17 @@ findHighestPriced([
 -----------------------------------------------------------------*/
 // Your solution for 16-findHighestPriced here:
 
-
+function findHighestPriced(arr) {
+  let highestPrice = 0;
+  let result;
+  arr.forEach(function(item) {
+    if (item.price > highestPrice) {
+      highestPrice = item.price;
+      result = item;
+    }
+  });
+  return result;
+}
 
 
 
@@ -455,7 +533,13 @@ mapArray( ['rose', 'tulip', 'daisy'], function(f, i) {
 -----------------------------------------------------------------*/
 // Your solution for 17-mapArray here:
 
-
+function mapArray(arr, callback) {
+  let result = [];
+  arr.forEach(function(el, idx) {
+    result.push(callback(el, idx));
+  });
+  return result;
+}
 
 
 
@@ -493,7 +577,12 @@ reduceArray( ['Yes', 'No', 'Yes', 'Maybe'], function(acc, v) {
 -----------------------------------------------------------------*/
 // Your solution for 18-reduceArray here:
 
-
+function reduceArray(arr, callback, acc) {
+  for (let i = 0; i < arr.length; i++) {
+    acc = callback(acc, arr[i], i);
+  }
+  return acc;
+}
 
 
 
@@ -525,7 +614,13 @@ flatten( [1, [2, [3, [4]]], 1, 'a', ['b', 'c']] );
 // Your solution for 19-flatten here:
 
 
-
+function flatten(arr) {
+  let flatArr = []
+  arr.forEach(a => {
+    Array.isArray(a) ? flatArr = flatArr.concat(flatten(a)) : flatArr.push(a);
+  })
+  return flatArr;
+}
 
 
 /*-----------------------------------------------------------------
@@ -549,7 +644,13 @@ isPrime(200) //=> false
 // Your solution for 20-isPrime here:
 
 
-
+function isPrime(n) {
+  if (n < 2 || !Number.isInteger(n)) return false;
+  for (var i = 2; i <= n / 2; i++) {
+    if (Number.isInteger(n / i)) return false;
+  }
+  return true;
+}
 
 
 /*-----------------------------------------------------------------
@@ -602,7 +703,16 @@ intersection([1, 'a', true, 1, 1], [true, 1, 'b', 1]) //=> [1, true, 1]
 // Your solution for 22-intersection here:
 
 
-
+function intersection(arr1, arr2) {
+  var result = [];
+  // create copy of 2nd array for purpose of handling dups
+  var _arr2 = [...arr2];
+  arr1.forEach(val => {
+    var idx = _arr2.indexOf(val);
+    if (idx > -1) result.push(_arr2.splice(idx, 1)[0]);
+  });
+  return result;
+}
 
 
 /*-----------------------------------------------------------------
@@ -628,7 +738,19 @@ balancedBrackets( '[({}[])]' ) // => true
 // Your solution for 23-balancedBrackets here:
 
 
-
+function balancedBrackets(string) {
+  if (string.length % 2) return false;
+  let stack = [];
+  for (let i = 0; i < string.length; i++) {
+    let s = string.charAt(i);
+    if ( '([{'.includes(s) ) {
+      stack.push(s);
+    } else {
+      if (!'() {} []'.includes(stack.pop() + s)) return false;
+    }
+  }
+  return true;
+}
 
 
 /*-----------------------------------------------------------------
@@ -658,7 +780,17 @@ isWinningTicket( [ ['ABC', 66], ['dddd', 15], ['Hello', 108] ] ) // => false
 // Your solution for 24-isWinningTicket here:
 
 
-
+function isWinningTicket(ticket) {
+  let winner = true;
+  for (let i = 0; i < ticket.length; i++) {
+    let charFromNumber = String.fromCharCode(ticket[i][1]);
+    if (!ticket[i][0]. includes(charFromNumber)) {
+      winner = false;
+      break;
+    }
+  }
+  return winner;
+}
 
 
 /*-----------------------------------------------------------------
@@ -688,7 +820,15 @@ getNumForIP( '10.0.0.1' ) // => 167772161
 // Your solution for 25-getNumForIP here:
 
 
-
+function getNumForIP(ip) {
+  // reverse the chunks so that the we can use the index like 256**idx 
+  let chunks = ip.split('.').reverse();
+  let sum = 0;
+  chunks.forEach(function(chunk, idx) {
+    sum += parseInt(chunk) * 256**idx;
+  });
+  return sum;
+}
 
 
 /*-----------------------------------------------------------------
